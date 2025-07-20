@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
   selector: 'app-root',
   imports: [RouterOutlet, FormsModule],
   templateUrl: './app.html',
+  standalone: true,
   styleUrl: './app.css'
 })
 export class App implements OnInit {
@@ -18,7 +19,7 @@ export class App implements OnInit {
   chatLog: string[] = [];
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.Connect()
   }
 
@@ -35,7 +36,7 @@ export class App implements OnInit {
     }
   }
 
-  sendMessage(){
+  sendMessage() {
     this.chatLog.push("sent: " + this.message)
     this.socket.send(this.message)
   }
