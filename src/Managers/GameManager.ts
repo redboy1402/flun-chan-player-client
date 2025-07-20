@@ -1,15 +1,14 @@
-import {Injectable, signal, WritableSignal} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameManager {
-  public gameName: WritableSignal<string>;
-  public gameId: WritableSignal<number>;
+  public gameName: string = '';
+  public gameId: number = -1;
+  public myName: string = '';
 
   constructor() {
-    this.gameName = signal('');
-    this.gameId = signal(0);
   }
 
 }

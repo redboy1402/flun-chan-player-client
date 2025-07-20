@@ -28,6 +28,7 @@ export class SocketManager {
   }
 
   public send(packet: Packet) {
+    console.log('Sent:', packet.packetToString());
     this.socket.send(packet.packetToString())
   }
 }

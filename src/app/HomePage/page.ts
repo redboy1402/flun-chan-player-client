@@ -20,16 +20,24 @@ export class HomePage implements OnInit {
   socket: SocketManager = null!;
   input: string = '';
   private router: Router;
-  private gameManager: GameManager;
+  private game: GameManager;
 
   constructor(socket: SocketManager, router: Router, gameManager: GameManager) {
     this.socket = socket;
     this.router = router;
-    this.gameManager = gameManager;
+    this.game = gameManager;
   }
 
   ngOnInit() {
-
+    this.socket.onReceive.subscribe((packet: Packet) => {
+      if (packet.name === 'GameType') {
+        const gtPacket = packet as GameTypePacket;
+        this.game.gameName = gtPacket.gameName;
+        this.game.gameId = gtPacket.gameId;
+        this.game.myName = this.input;
+        this.router.navigate(['game'])
+      }
+    })
   }
 
   Next() {
@@ -42,7 +50,6 @@ export class HomePage implements OnInit {
     } else {
       const hostPacket = new PlayerPacket(this.gameId()!, Packet.VERSION, this.input)
       this.socket.send(hostPacket)
-      this.router.navigate(['game'])
     }
   }
 

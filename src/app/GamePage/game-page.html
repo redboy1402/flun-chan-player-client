@@ -1,1 +1,41 @@
-<h1>{{game.gameName()}}</h1>
+<h1>You are playing {{ game.gameName }}</h1>
+@switch (lastPacket()?.name) {
+  @case ('RequestNumber') {
+    <h2>{{ lastPacket()!.message }}</h2>
+    <label for="numberInput">
+      <input id="numberInput" type="number" pattern="[^d]*" name="text" class="input" [ngModel]="response()"
+             (ngModelChange)="response.set($event)"
+             placeholder="Your Answer..." style="width: 90%; margin: auto" autofocus>
+    </label>
+
+  }
+  @case ('RequestString') {
+    <h2>{{ lastPacket()!.message }}</h2>
+    <label for="stringInput">
+      <input id="stringInput" type="text" pattern="[^\|]*" name="text" class="input" [ngModel]="response()"
+             (ngModelChange)="response.set($event)"
+             placeholder="Your Answer..." style="width: 90%; margin: auto" autofocus>
+    </label>
+  }
+  @case ('RequestChoice') {
+    <h2>{{ lastPacket()!.message }}</h2>
+    @for (choice of choiceOptions(); track choice) {
+      <button (click)="response.set(String($index))">{{ choice }}</button>
+    }
+  }
+}
+
+@if (lastPacket()) {
+
+  <button class="button" (click)="Submit()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+         class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+    </svg>
+
+    <div class="text">
+      Submit
+    </div>
+
+  </button>
+}
