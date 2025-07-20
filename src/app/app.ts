@@ -1,7 +1,6 @@
-import {Component, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {Socket} from "socket.io";
 
 @Component({
   selector: 'app-root',
@@ -9,15 +8,36 @@ import {Socket} from "socket.io";
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   inputData: string = '';
+  ip = 'http://localhost:5000'
+  socket = new WebSocket(this.ip);
 
-  submitData() {
-    if (this.inputData == '') {
-      alert("no input detected")
-    } else {
-      alert(this.inputData)
+  message: string = '';
+
+  chatLog: string[] = [];
+
+
+  ngOnInit(){
+    this.Connect()
+  }
+
+  Connect() {
+    this.socket = new WebSocket(this.ip)
+
+    this.socket.onopen = () => {
+      this.chatLog.push("joined server " + this.ip)
     }
+
+    this.socket.onmessage = (e: MessageEvent) => {
+      console.log("server: " + e.data)
+    }
+
+  }
+
+  sendMessage(){
+    this.chatLog.push("sent: " + this.message)
+    this.socket.send(this.message)
   }
 
   protected readonly title = signal('FlunChanClientPlayer');

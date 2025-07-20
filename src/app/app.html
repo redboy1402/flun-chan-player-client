@@ -1,8 +1,9 @@
 <p>{{ title() }}</p>
-<label for="inputTest">
-  <input id="inputTest" type="text" [(ngModel)]="inputData"/>
-</label>
-<button (click)="submitData()"> submit data! </button>
-<p> input: {{ inputData }} </p>
-
+<input type="text" [(ngModel)]="message"/>
+<button (click)="sendMessage()">Send Message</button>
+@if (socket?.readyState) {
+  <p>READY</p>
+} @else {
+  <p>not ready :(</p>
+}
 <router-outlet/>
