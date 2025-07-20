@@ -22,6 +22,7 @@ export class App implements OnInit {
     this.Connect()
   }
 
+
   Connect() {
     this.socket = new WebSocket(this.ip)
 
