@@ -1,6 +1,8 @@
-class GamePacket extends Packet {
+import {Packet} from './Packet';
 
-  public gameId: number;
+export class GamePacket extends Packet {
+
+  public readonly gameId: number;
 
   protected constructor(name: string, gameId: number, data: string[]) {
     super(name, [gameId.toString(), ...data]);

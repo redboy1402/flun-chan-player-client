@@ -1,10 +1,12 @@
-class PlayerPacket extends GamePacket {
+import {GamePacket} from './GamePacket';
 
-  public version: number;
-  public playerName: string;
+export class PlayerPacket extends GamePacket {
+
+  public readonly version: number;
+  public readonly playerName: string;
 
   constructor(gameId: number, version: number, playerName: string) {
-    super("Host", gameId, [version.toString(), playerName]);
+    super("Player", gameId, [version.toString(), playerName]);
     this.version = version;
     this.playerName = playerName;
   }

@@ -1,9 +1,11 @@
-class RequestNumberPacket extends GamePacket {
+import {GamePacket} from './GamePacket';
+
+export class RequestNumberPacket extends GamePacket {
 
 
-  public message: string;
-  public lowerBound: number;
-  public upperBound: number;
+  public readonly message: string;
+  public readonly lowerBound: number;
+  public readonly upperBound: number;
 
   constructor(gameId: number, message: string, lowerBound: number, upperBound: number) {
     super("RequestNumber", gameId, [message, lowerBound.toString(), upperBound.toString()]);

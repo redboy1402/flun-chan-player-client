@@ -1,31 +1,35 @@
 import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {Packet} from '../Packets/Packet';
-import {PlayerPacket} from '../Packets/PlayerPacket';
-import {SocketManager} from '../Managers/SocketManager';
+import {SocketManager} from '../../Managers/SocketManager';
+import {Packet} from '../../Packets/Packet';
+import {PlayerPacket} from '../../Packets/PlayerPacket';
+import {Router} from '@angular/router';
+import {GameManager} from '../../Managers/GameManager';
+import {GameTypePacket} from '../../Packets/GameTypePacket';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, FormsModule],
-  templateUrl: './app.html',
+  selector: 'home-page',
+  imports: [FormsModule],
+  templateUrl: '/home-page.html',
   standalone: true,
-  styleUrl: './app.css'
+  styleUrl: '/home-page.css'
 })
-export class App implements OnInit {
+export class HomePage implements OnInit {
   gameId: WritableSignal<number | null> = signal(null);
   socket: SocketManager = null!;
   input: string = '';
-  chatLog: Packet[] = [];
+  private router: Router;
+  private gameManager: GameManager;
 
-  constructor(socket: SocketManager) {
+  constructor(socket: SocketManager, router: Router, gameManager: GameManager) {
     this.socket = socket;
+    this.router = router;
+    this.gameManager = gameManager;
   }
 
   ngOnInit() {
-    this.socket.onReceive.subscribe((packet: Packet) => {
-      this.chatLog.push(packet)
-    })
+
   }
 
   Next() {
@@ -37,8 +41,8 @@ export class App implements OnInit {
       }
     } else {
       const hostPacket = new PlayerPacket(this.gameId()!, Packet.VERSION, this.input)
-      this.chatLog.push(hostPacket)
       this.socket.send(hostPacket)
+      this.router.navigate(['game'])
     }
   }
 

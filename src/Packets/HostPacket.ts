@@ -1,4 +1,6 @@
-class HostPacket extends GamePacket {
+import {GamePacket} from './GamePacket';
+
+export class HostPacket extends GamePacket {
 
   public version: number;
 
