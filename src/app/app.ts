@@ -31,9 +31,8 @@ export class App implements OnInit {
     }
 
     this.socket.onmessage = (e: MessageEvent) => {
-      console.log("server: " + e.data)
+      this.chatLog.push("server: " + e.data)
     }
-
   }
 
   sendMessage(){

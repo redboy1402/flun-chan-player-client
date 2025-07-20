@@ -1,9 +1,14 @@
 <p>{{ title() }}</p>
 <input type="text" [(ngModel)]="message"/>
 <button (click)="sendMessage()">Send Message</button>
-@if (socket?.readyState) {
+@if (socket.readyState) {
   <p>READY</p>
 } @else {
   <p>not ready :(</p>
+}
+
+<h3>Log</h3>
+@for (m of chatLog; track m) {
+  <p>{{m}}</p>
 }
 <router-outlet/>
