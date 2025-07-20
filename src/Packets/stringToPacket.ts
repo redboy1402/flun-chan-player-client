@@ -30,7 +30,7 @@ export function stringToPacket(packet: string): Packet | null {
       case "ReturnString":
         return new ResponseStringPacket(Number.parseFloat(data[0]), data[1], data[2]);
       case "RequestChoice":
-        return new RequestChoicePacket(Number.parseFloat(data[0]), data[1], data[2].split("¥"))
+        return new RequestChoicePacket(Number.parseFloat(data[0]), data[1], data[2].split("%~*%"))
       case "ReturnChoice":
         return new ResponseChoicePacket(Number.parseFloat(data[0]), data[1], Number.parseFloat(data[2]));
       case "Ping":

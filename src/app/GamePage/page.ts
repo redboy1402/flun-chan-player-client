@@ -71,6 +71,7 @@ export class GamePage implements OnInit {
         break;
     }
     this.lastPacket.set(null);
+    this.response.set('');
   }
 
   readonly choiceOptions = computed(() => {
@@ -80,4 +81,5 @@ export class GamePage implements OnInit {
       : [];
   });
   protected readonly String = String;
+  protected readonly Number = Number;
 }

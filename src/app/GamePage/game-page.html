@@ -20,7 +20,8 @@
   @case ('RequestChoice') {
     <h2>{{ lastPacket()!.message }}</h2>
     @for (choice of choiceOptions(); track choice) {
-      <button (click)="response.set(String($index))">{{ choice }}</button>
+      <button (click)="response.set(String($index))" [disabled]="$index === Number.parseFloat(response())">{{ choice }}
+      </button>
     }
   }
 }

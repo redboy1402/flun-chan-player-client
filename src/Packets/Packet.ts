@@ -1,5 +1,5 @@
 export class Packet {
-  public static VERSION = 3;
+  public static VERSION = 4;
   public readonly name: string;
   public readonly data: string[];
 
