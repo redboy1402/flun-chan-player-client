@@ -1,10 +1,9 @@
 import {Component, OnInit, signal, WritableSignal} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {SocketManager} from '../../Managers/SocketManager';
 import {Packet} from '../../Packets/Packet';
 import {PlayerPacket} from '../../Packets/PlayerPacket';
-import {Router} from '@angular/router';
 import {GameManager} from '../../Managers/GameManager';
 import {GameTypePacket} from '../../Packets/GameTypePacket';
 
@@ -41,6 +40,9 @@ export class HomePage implements OnInit {
   }
 
   Next() {
+    if (!this.socket.connected()) {
+      location.reload();
+    }
     if (this.gameId() === null) {
       let value = Number.parseFloat(this.input);
       if (!Number.isNaN(value)) {

@@ -27,6 +27,10 @@ export class SocketManager {
     }
   }
 
+  public connected(): boolean {
+    return this.socket.readyState === WebSocket.OPEN;
+  }
+
   public send(packet: Packet) {
     console.log('Sent:', packet.packetToString());
     this.socket.send(packet.packetToString())
