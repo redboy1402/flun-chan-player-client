@@ -7,6 +7,12 @@ import {PlayerPacket} from '../../Packets/PlayerPacket';
 import {GameManager} from '../../Managers/GameManager';
 import {GameTypePacket} from '../../Packets/GameTypePacket';
 
+enum connectionStates {
+  NO_LOBBY_ID,
+  WAITING_FOR_CONNECTION,
+  GAMING,
+}
+
 @Component({
   selector: 'home-page',
   imports: [FormsModule],
@@ -20,6 +26,9 @@ export class HomePage implements OnInit {
   input: string = '';
   private router: Router;
   private game: GameManager;
+
+  connectionStates = connectionStates;
+  connectionState = connectionStates.NO_LOBBY_ID;
 
   constructor(socket: SocketManager, router: Router, gameManager: GameManager) {
     this.socket = socket;

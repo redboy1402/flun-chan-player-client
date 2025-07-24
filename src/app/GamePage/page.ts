@@ -25,10 +25,10 @@ export class GamePage implements OnInit {
   socket: SocketManager = null!;
   protected game: GameManager;
 
-
   protected lastPacket: WritableSignal<RequestChoicePacket | RequestNumberPacket | RequestStringPacket | null> = signal(null);
   protected response = signal('');
   private router: Router;
+
 
   constructor(socket: SocketManager, game: GameManager, router: Router) {
     this.socket = socket;

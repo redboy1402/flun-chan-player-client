@@ -1,28 +1,31 @@
-<h1>{{ title() }}</h1>
-@if (gameId() === null) {
-  <label for="gameInput">
-    <input id="gameInput" type="text" name="text" class="input" [(ngModel)]="input" pattern="\d+"
-           placeholder="Enter the GameId" style="width: 90%; margin: auto" autofocus>
-  </label>
-} @else {
-  <h2>Connecting to game {{ gameId() }}</h2>
-  <label for="playerNameInput">
-    <input id="playerNameInput" type="text" pattern="[^\|]*" name="text" class="input" [(ngModel)]="input"
-           placeholder="Enter your PlayerName" style="width: 90%; margin: auto" autofocus>
-  </label>
+<div style="text-align: center">
+  <h1 [class.coolBackground]="true">{{ title().toUpperCase() }}</h1>
+</div>
+@switch (connectionState){
+  @case (connectionStates.NO_LOBBY_ID){
+    <div>
+      <div [class.lobbyIDInput]="true">
+        <input type="text" name="text" class="input" [(ngModel)]="input"
+               pattern="\d+" placeholder="LOBBY ID" [defaultValue]="input" autofocus>
+        <button (click) = "Next()">
+          <p [class.coolBackground]="true">JOIN</p>
+        </button>
+      </div>
+    </div>
+  }
+  @case (connectionStates.WAITING_FOR_CONNECTION) {
+    <p>waiting...</p>
+  }
 }
 
 
-
 <button class="button" (click)="Next()">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+  <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
        class="w-6 h-6">
     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
   </svg>
-
   <div class="text">
     Button
   </div>
-
 </button>
 

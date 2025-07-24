@@ -1,5 +1,17 @@
 /* From Uiverse.io by Galahhad */
 .input {
+  color: red;
+}
+
+.lobbyIDInput {
+  width: auto;
+  display: flex;
+  padding: 5px;
+  height: 75px;
+}
+
+.lobbyIDInput > * {
+  margin: 10px auto;
   padding: 12px;
   border: none;
   border-radius: 4px;
@@ -7,29 +19,49 @@
   outline: none;
   color: white;
   background-color: #444;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.lobbyIDInput input[type=text] {
+  margin-right: 0;
+  width: 50%;
+  background-color: #333;
+}
+
+.lobbyIDInput button {
+  margin-left: -10px;
+  font-weight: bold;
+  text-justify: auto;
+  width: fit-content;
+  z-index: 1;
+}
+
+.lobbyIDInput button:active{
+  transform: translateX(1px);
+  background-color: #383838;
 }
 
 .input:invalid {
-  animation: justshake 0.3s forwards;
+  animation: justshake 0.15s forwards;
+  animation-iteration-count: 2;
   color: red;
 }
 
 @keyframes justshake {
-  25% {
-    transform: translateX(5px);
+  0% {
+    transform: translateX(0px);
   }
 
-  50% {
-    transform: translateX(-5px);
+  25% {
+    transform: translateX(3px);
   }
 
   75% {
-    transform: translateX(5px);
+    transform: translateX(-3px);
   }
 
-  100% {
-    transform: translateX(-5px);
-  }
 }
 
 /* From Uiverse.io by reshades */
@@ -63,4 +95,26 @@
 
 .text {
   margin: 0 1.5em
+}
+
+.coolBackground {
+  background: radial-gradient(circle, mediumseagreen, greenyellow);
+  background-size: 200% 200%;
+  animation: coolBackground 15s both infinite;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+@keyframes coolBackground {
+  0%{
+    background-position: 0;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0;
+  }
+
 }
