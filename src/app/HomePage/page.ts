@@ -18,6 +18,8 @@ export class HomePage implements OnInit {
   gameId: WritableSignal<number | null> = signal(null);
   socket: SocketManager = null!;
   input: string = '';
+  gameIdInput: string = '';
+  nameInput: string = '';
   private router: Router;
   private game: GameManager;
 
@@ -44,13 +46,12 @@ export class HomePage implements OnInit {
       location.reload();
     }
     if (this.gameId() === null) {
-      let value = Number.parseInt(this.input);
+      let value = Number.parseInt(this.gameIdInput);
       if (!Number.isNaN(value)) {
         this.gameId.set(value)
-        this.input = '';
       }
     } else {
-      const hostPacket = new PlayerPacket(this.gameId()!, Packet.VERSION, this.input)
+      const hostPacket = new PlayerPacket(this.gameId()!, Packet.VERSION, this.nameInput)
       this.socket.send(hostPacket)
     }
   }

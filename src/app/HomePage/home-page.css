@@ -30,12 +30,32 @@
   background-color: #333;
 }
 
+.lobbyIDInput input[type=text]:read-only {
+  color: dimgray;
+}
+
 .lobbyIDInput button {
   margin-left: -10px;
   font-weight: bold;
   text-justify: auto;
   width: fit-content;
   z-index: 1;
+}
+
+.lobbyIDInput button:disabled .coolBackground {
+  background: radial-gradient(circle, dimgray, darkslategray);
+  background-size: 200% 200%;
+  animation: coolBackground 15s both infinite;
+  background-clip: text;
+}
+
+.coolBackground {
+  background: radial-gradient(circle, mediumseagreen, greenyellow);
+  background-size: 200% 200%;
+  animation: coolBackground 15s both infinite;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
 }
 
 .lobbyIDInput button:active{
@@ -97,13 +117,8 @@
   margin: 0 1.5em
 }
 
-.coolBackground {
-  background: radial-gradient(circle, mediumseagreen, greenyellow);
-  background-size: 200% 200%;
-  animation: coolBackground 15s both infinite;
-  background-clip: text;
-  color: transparent;
-  margin: 0;
+
+.coolBackground:disabled:hover {
 }
 
 @keyframes coolBackground {
