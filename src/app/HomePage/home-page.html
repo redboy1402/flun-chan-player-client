@@ -1,22 +1,28 @@
 <div style="text-align: center">
   <h1 [class.coolBackground]="true">{{ title().toUpperCase() }}</h1>
 </div>
-@switch (connectionState){
-  @case (connectionStates.NO_LOBBY_ID){
+@if (gameId() == null){
+  <div>
+    <div [class.lobbyIDInput]="true">
+      <input type="text" name="text" class="input" [(ngModel)]="input"
+             pattern="\d+" placeholder="LOBBY ID" [defaultValue]="input" autofocus>
+      <button (click) = "Next()">
+        <p [class.coolBackground]="true">JOIN</p>
+      </button>
+    </div>
+  </div>
+} @else {
     <div>
+      <p>{{gameId()}}</p>
       <div [class.lobbyIDInput]="true">
         <input type="text" name="text" class="input" [(ngModel)]="input"
-               pattern="\d+" placeholder="LOBBY ID" [defaultValue]="input" autofocus>
+               placeholder="PLAYER NAME" [defaultValue]="input" autofocus>
         <button (click) = "Next()">
           <p [class.coolBackground]="true">JOIN</p>
         </button>
       </div>
     </div>
   }
-  @case (connectionStates.WAITING_FOR_CONNECTION) {
-    <p>waiting...</p>
-  }
-}
 
 
 <button class="button" (click)="Next()">

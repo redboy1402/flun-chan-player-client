@@ -12,7 +12,7 @@ export class SocketManager {
   public onReceive: Observable<Packet> = this.messageSubject.asObservable();
 
   constructor() {
-    this.socket = new WebSocket('wss://api.flun.in');
+    this.socket = new WebSocket('http://localhost:5000');
     this.socket.onopen = () => console.log('WebSocket connected');
     this.socket.onmessage = msg => {
 
